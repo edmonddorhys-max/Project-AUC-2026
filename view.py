@@ -10,7 +10,7 @@ class CalculatorView:
         self.root = Tk()
         self.root.title("Calculator2026")
         self.root.minsize(480, 540)
-        self.root.resizable(False, False)
+        self.root.resizable(True, True)
         self.root.geometry("480x540")
         self.root.config(bg="#FFFFFF")
 
@@ -33,11 +33,11 @@ class CalculatorView:
        
     def create_buttons(self):
         button_texts = [
+            'AC', '√', '⇐', '**',
             '7', '8', '9', '/',
             '4', '5', '6', '*',
             '1', '2', '3', '-',
             '0', '.', '=', '+',
-            'AC', '√', '⇐', '**'
         ]
 
         row_val = 1
@@ -56,8 +56,6 @@ class CalculatorView:
             self.frame.grid_columnconfigure(col, weight=1)
         for row in range(row_val + 1):
             self.frame.grid_rowconfigure(row, weight=1)
-
-
        
            
     def get_display(self):

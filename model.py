@@ -1,41 +1,27 @@
-import math as m
+import math
 
 
 class CalculatorModel:
     def __init__(self):
-        pass
-        
+        self.valeur =""
 
-    def add(self, a, b):
-        return a+b
+    
+    def add(self, op):
+        self.valeur += op
+        return self.valeur
+    
+    def racine(self):
+        self.valeur = math.sqrt(self.valeur)
+        return self.valeur
 
-    def sub(self, a, b):
-        return a-b
-
-    def mul(self, a, b):
-       return a*b
-
-    def div(self, a, b):
-        if b==0:
-            raise ValueError("Ne peut pas diviser par zero")
-        else:
-            return a/b
-        
-
-    def racine(self, a):
-        
-        if a < 0:
-            raise ValueError("Ne peut pas calculer la racine carrée d'un nombre négatif")
-        else:
-            return m.sqrt(a)
-        
-    def exposant(self, a, b):
-        return a**b
-        
-    def calculate(self, expression):
+    
+    def calculate(self):
         try:
-            result = eval(expression)
+            result = str(eval(self.valeur))
             return result
-        
         except Exception:
             return "Erreur"
+        
+
+    
+    

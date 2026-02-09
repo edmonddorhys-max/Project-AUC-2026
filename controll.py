@@ -1,32 +1,27 @@
 class CalculatorControll :
     def __init__(self, model, view):
         self.model = model()
-        self.view = view(self)
+        self.view = view(self) 
         self.view.controller = self
-        
-        
 
-    def on_button_click(self, char):
-        
-        current_text = self.view.get_display()
-
-        if char == 'AC':
-            # Effacer ecran
+    
+    def calculate(self):
+        result = self.model.calculate()
+        self.view.display_var.set(result)
+    
+    def on_button_click(self, button_text):
+        if button_text == "AC":
+            self.model.valeur = ""
             self.view.set_display("")
-        elif char == '=':
-            # Lancer le calcul
-            result = self.model.calculate(current_text)
-            self.view.set_display(result)
-        elif char == '⇐':
-            # supprimer le dernier caractere
-             self.view.set_display(current_text[:-1])
+        elif button_text == "⇐":
+            self.model.valeur = self.model.valeur[:-1]
+            self.view.set_display(self.model.valeur)
+        elif button_text == "=":
+            self.calculate()
+
+        elif button_text == "√":
+            value = self.model.racine()
+            self.view.set_display(value)
         else:
-           
-            if current_text == "Erreur":
-                self.view.set_display(char)
-            else:
-                self.view.set_display(current_text + char)
-
-
-
-
+            value =self.model.add(button_text)
+            self.view.set_display(value)
