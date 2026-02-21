@@ -17,11 +17,23 @@ class CalculatorControll :
             self.model.valeur = self.model.valeur[:-1]
             self.view.set_display(self.model.valeur)
         elif button_text == "=":
-            self.calculate()
+            if self.model.valeur.startswith("√"):
+                result = self.model.racine()
+
+            else:
+                result= self.model.calculate()
+            
+            self.view.set_display(result)
+
 
         elif button_text == "√":
-            value = self.model.racine()
-            self.view.set_display(value)
+            self.model.add(button_text) 
+            self.view.set_display(self.model.valeur)
+
+        elif button_text == "⋇":
+            self.model.add(button_text)
+            self.view.set_display(self.model.valeur)
+
         else:
             value =self.model.add(button_text)
             self.view.set_display(value)

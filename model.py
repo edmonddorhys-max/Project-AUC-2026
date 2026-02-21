@@ -10,17 +10,20 @@ class CalculatorModel:
         self.valeur += op
         return self.valeur
     
-    def racine(self, op):
-        try:
-            nombre = eval(self.valeur)
-            self.valeur = str(math.sqrt(nombre))
-            return self.valeur
-        except Exception:
+    def racine(self):
+     try:
+        nombre_pur = self.valeur[1:] 
+        
+        val = float(nombre_pur)
+        if val < 0:
             return "Erreur"
-
-
-
-    
+            
+        result = str(math.sqrt(val))
+        self.valeur = result
+        return result
+     except Exception:
+        return "Erreur"
+     
     def calculate(self):
         try:
             result = str(eval(self.valeur))
