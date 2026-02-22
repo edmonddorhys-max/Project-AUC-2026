@@ -30,9 +30,6 @@ class CalculatorControll :
             self.model.add(button_text) 
             self.view.set_display(self.model.valeur)
 
-        elif button_text == "⋇":
-            self.model.add(button_text)
-            self.view.set_display(self.model.valeur)
 
         else:
             value =self.model.add(button_text)
