@@ -57,7 +57,6 @@ class CalculatorView:
             self.frame.grid_columnconfigure(col, weight=1)
         for row in range(row_val + 1):
             self.frame.grid_rowconfigure(row, weight=1)
-       
            
     def get_display(self):
         return self.display_var.get()
