@@ -19,7 +19,6 @@ class CalculatorControll :
         elif button_text == "=":
             if self.model.valeur.startswith("√"):
                 result = self.model.racine()
-
             else:
                 result= self.model.calculate()
             

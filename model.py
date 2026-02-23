@@ -23,10 +23,15 @@ class CalculatorModel:
         return result
      except Exception:
         return "Erreur"
-     
+    def divide(self, a,b):
+        if b==0:
+            return "cannot divide by zero"
+        else:
+            return a/b
+
     def calculate(self):
         try:
-            result = str(eval(self.valeur))
+            result = str(eval(self.valeur.replace('÷', '/').replace('×', '*').replace('^', '**')))
             return result
         except Exception:
             return "Erreur"
