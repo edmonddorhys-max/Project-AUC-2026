@@ -1,12 +1,12 @@
-import customtkinter 
+from tkinter import*
 
 class CalculatorView():
     def __init__(self, root):
         self.root = root
 
         #display
-        self.root = customtkinter.CTk()
-        self.root.title("Calculator2026")
+        self.root = Tk()
+        self.root.title("LightGroup-Calculator2026")
         self.root.iconbitmap("OIP.ico")
         self.root.minsize(480, 540)
         self.root.resizable(True, True)
@@ -16,7 +16,7 @@ class CalculatorView():
         self.create_frame()    
     
         #stocker texte ecran
-        self.display_var = customtkinter.StringVar()
+        self.display_var = StringVar()
         
         self.create_display()
         self.create_buttons()
@@ -25,11 +25,11 @@ class CalculatorView():
 
     
     def create_frame(self):
-        self.frame = customtkinter.CTkFrame(self.root, bg_color= "#000000")
-        self.frame.pack(fill="both", expand=True)
+        self.frame = Frame(self.root, bg= "#FFFFFF")
+        self.frame.pack(expand=YES)
 
     def create_display(self):
-        display_entry = customtkinter.CTkEntry(self.frame, textvariable=self.display_var, font=("Arial", 24), border_width= 10, insertwidth=2, width=14, justify='right')
+        display_entry = Entry(self.frame, textvariable=self.display_var, font=("Arial", 24), bd= 10, insertwidth=2,width=14, justify='right')
         display_entry.grid(row= 0, column=0, columnspan=4, sticky="nsew")
        
     def create_buttons(self):
@@ -40,12 +40,19 @@ class CalculatorView():
             '1', '2', '3', '+',
             '()', '0', '.', '='
         ]
-
+        
         row_val = 1
         col_val = 0
 
         for text in button_texts:
-            button = customtkinter.CTkButton(self.frame, text=text, bg_color="#075DA8", font=("Arial", 18), command=lambda t=text: self.controller.on_button_click(t), width=60, height=60)
+
+            if text in ['AC', '√', '⇐', '÷', '×', '-', '+', '=']:
+                 bg_color = "#0FEDE6"
+            
+            else:
+                 bg_color = "#4D6061"
+            
+            button = Button(self.frame, text=text, bg=bg_color, font=("Arial", 18), command=lambda t=text: self.controller.on_button_click(t), width=10, height=3)
             button.grid(row=row_val, column=col_val, sticky="nsew")
             
             col_val += 1
@@ -57,7 +64,8 @@ class CalculatorView():
             self.frame.grid_columnconfigure(col, weight=1)
         for row in range(row_val + 1):
             self.frame.grid_rowconfigure(row, weight=1)
-
+        
+            
     
            
     def get_display(self):

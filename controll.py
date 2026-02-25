@@ -33,15 +33,16 @@ class CalculatorControll :
         elif button_text == "()":
             val = str(self.model.valeur)
         
-        # On compte le nombre de parenthèses ouvrantes et fermantes
+        
             open_count = val.count('(')
             close_count = val.count(')')
         
-        # Si on a plus de parenthèses ouvrantes ET que le dernier caractère est un chiffre ou une parenthèse fermante
+        
             if open_count > close_count and val and (val[-1].isdigit() or val[-1] == ')'):
                 self.model.add(")")
+            
             else:
-            # Sinon, par défaut on ouvre une parenthèse
+            
                 self.model.add("(")
             self.view.set_display(self.model.valeur)
 

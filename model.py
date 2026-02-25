@@ -7,14 +7,14 @@ class CalculatorModel:
 
     
     def add(self, op):
-        if self.valeur == "" and op in "+-×÷":
+        if self.valeur == "" and op in "+-×÷()":
             self.valeur = ""
             return self.valeur
         
         elif len(self.valeur)>=1 and self.valeur[-1] in "+-×÷√" and op in "+-×÷√":
             self.valeur = self.valeur
             return self.valeur
-            
+        
         self.valeur += op
         return self.valeur
     
