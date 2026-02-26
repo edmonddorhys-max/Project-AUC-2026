@@ -33,7 +33,7 @@ class CalculatorView():
         self.buttons_frame = ctk.CTkFrame(self.root, fg_color="transparent")
         self.buttons_frame.pack(fill="both", expand=True, padx=15, pady=10)
         
-        # On configure 4 colonnes et 5 lignes de taille égale
+        # On configure 4 colonnes et 5 lignes de taille egale
         for i in range(4):
             self.buttons_frame.grid_columnconfigure(i, weight=1)
         for i in range(5):
