@@ -11,7 +11,7 @@ class CalculatorView():
         self.root = ctk.CTk()
         self.root.title("LightGroup-Calculator2026")
         self.root.iconbitmap("calculator.ico")
-        self.root.minsize(540, 450)
+        self.root.minsize(530, 540)
         self.root.resizable(False, False)
         self.root.geometry("380x650")
         self.root.configure(fg_color="#1e1e1e")
