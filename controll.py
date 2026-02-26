@@ -13,7 +13,7 @@ class CalculatorControll :
         if button_text == "AC":   
             self.model.valeur = ""
             self.view.set_display("")
-        elif button_text == "⇐":
+        elif button_text == "⌫":
             self.model.valeur = self.model.valeur[:-1]
             self.view.set_display(self.model.valeur)
         elif button_text == "=":
@@ -45,6 +45,9 @@ class CalculatorControll :
             
                 self.model.add("(")
             self.view.set_display(self.model.valeur)
+        
+        elif button_text == "quit":
+            self.view.get_root().quit()
 
 
         else:

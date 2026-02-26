@@ -11,7 +11,7 @@ class CalculatorView():
         self.root = ctk.CTk()
         self.root.title("LightGroup-Calculator2026")
         self.root.iconbitmap("OIP.ico")
-        self.root.minsize(480, 540)
+        self.root.minsize(540, 450)
         self.root.resizable(False, False)
         self.root.geometry("380x650")
         self.root.configure(fg_color="#1e1e1e")
@@ -53,7 +53,9 @@ class CalculatorView():
        
     def create_buttons(self):
         button_texts = [
-            ['AC', '()', '%', '÷'],
+            
+            ['AC', '()', '%', '⌫'],
+            ['√', '^', 'quit', '÷'],
             ['7', '8', '9', '×'],
             ['4', '5', '6', '-'],
             ['1', '2', '3', '+'],
@@ -88,6 +90,11 @@ class CalculatorView():
                     bg_color = light_grey
                     txt_color = cyan_text
                     hover_col = "#444444"
+                elif text == '⌫':
+                    bg_color = light_grey
+                    hover_col = "#FF0000"
+                elif text == "quit":
+                    hover_col = "#FF0000"
         
                 button = ctk.CTkButton(
                     self.buttons_frame,
