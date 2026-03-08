@@ -8,6 +8,9 @@ class CalculatorControll :
     def calculate(self):
         result = self.model.calculate()
         self.view.display_var.set(result)
+
+    def close_app(self):
+        self.view.get_root().destroy()
     
     def on_button_click(self, button_text):
         if button_text == "AC":   
@@ -16,13 +19,17 @@ class CalculatorControll :
         elif button_text == "⌫":
             self.model.valeur = self.model.valeur[:-1]
             self.view.set_display(self.model.valeur)
+            
         elif button_text == "=":
             if self.model.valeur.startswith("√"):
                 result = self.model.racine()
+            
             else:
                 result= self.model.calculate()
             
             self.view.set_display(result)
+            self.view.update_history(self.model.history)
+
 
 
         elif button_text == "√":
@@ -46,10 +53,20 @@ class CalculatorControll :
                 self.model.add("(")
             self.view.set_display(self.model.valeur)
         
-        elif button_text == "quit":
-            self.view.get_root().quit()
+        elif button_text == "🕒":
+            self.view.toggle_menu(self.model.history)
+
+        elif button_text == "Mod":
+            result = self.model.check_parity()
+            self.view.set_display(result)
+
+    
 
 
         else:
             value =self.model.add(button_text)
             self.view.set_display(value)
+    
+     
+    
+        

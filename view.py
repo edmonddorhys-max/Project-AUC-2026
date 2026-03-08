@@ -15,7 +15,14 @@ class CalculatorView():
         self.root.resizable(False, False)
         self.root.geometry("380x650")
         self.root.configure(fg_color="#1e1e1e")
+      
+     
+        # Container pour la calculatrice (gauche)
+        self.calc_container = ctk.CTkFrame(self.root, fg_color="transparent")
+        self.calc_container.pack(side="left", fill="both", expand=True)
+        self.history_visible = False
 
+        self.create_top_bar()
            
     
         #stocker texte ecran
@@ -25,12 +32,24 @@ class CalculatorView():
         self.create_display()
         self.create_frame() 
         self.create_buttons()
-
-   
-
     
+    def create_top_bar(self):
+        self.top_bar = ctk.CTkFrame(self.calc_container, fg_color="transparent")
+        self.top_bar.pack(fill="x", padx=10, pady=(5, 0))
+        
+        self.btn_quit = ctk.CTkButton(
+            self.top_bar, 
+            text="Power", 
+            width=60, 
+            height=25,
+            fg_color="#FF0000", 
+            hover_color="#D58181",
+            command=lambda: self.controller.close_app()
+        )
+        self.btn_quit.pack(side="left")
+
     def create_frame(self):
-        self.buttons_frame = ctk.CTkFrame(self.root, fg_color="transparent")
+        self.buttons_frame = ctk.CTkFrame(self.calc_container, fg_color="transparent")
         self.buttons_frame.pack(fill="both", expand=True, padx=15, pady=10)
         
         # On configure 4 colonnes et 5 lignes de taille egale
@@ -38,10 +57,15 @@ class CalculatorView():
             self.buttons_frame.grid_columnconfigure(i, weight=1)
         for i in range(5):
             self.buttons_frame.grid_rowconfigure(i, weight=1)
+    
 
     def create_display(self):
+
+
+
+
         self.display_entry = ctk.CTkEntry(
-        self.root, 
+        self.calc_container, 
         textvariable=self.display_var, 
         font=("Roboto", 50), 
         border_width=0, 
@@ -50,12 +74,16 @@ class CalculatorView():
         justify='right',
         height=150)
         self.display_entry.pack(fill="x", padx=20, pady=(20, 0))
+        self.display_entry.configure(state="readonly")
+
+    
+        
        
     def create_buttons(self):
         button_texts = [
             
             ['AC', '()', '%', '⌫'],
-            ['√', '^', 'quit', '÷'],
+            ['√', 'Mod', '🕒', '÷'],
             ['7', '8', '9', '×'],
             ['4', '5', '6', '-'],
             ['1', '2', '3', '+'],
@@ -80,7 +108,7 @@ class CalculatorView():
                 txt_color = "white"
                 hover_col = "#2C2C2C"
 
-                if text in ['÷', '×', '-', '+', 'V', '%', '()']:
+                if text in ['÷', '×', '-', '+', '√', 'Mod', '%', '()']:
                     bg_color = light_grey
                     hover_col = "#444444"
                 elif text == '=':
@@ -94,7 +122,7 @@ class CalculatorView():
                     bg_color = "#FF0000"
                     hover_col = "#D58181"
     
-                elif text == "quit":
+                elif text == "≡":
                     hover_col = "#1e1e1e"
         
                 button = ctk.CTkButton(
@@ -122,6 +150,34 @@ class CalculatorView():
     def get_root(self):
         return self.root
     
+    def toggle_menu(self, history):
+        if self.history_visible:
+            self.history_frame.destroy()
+            self.root.geometry("380x650")
+            self.history_visible = False
+        else:
+            self.root.geometry("680x650")
+            self.history_frame = ctk.CTkFrame(self.root, fg_color="transparent")
+            self.history_frame.pack(side="right", fill="both", expand=True, padx=10, pady=10)
+           
 
+            label_menu = ctk.CTkLabel(self.history_frame, text="🕒", font=("Roboto", 20, "bold"))
+            label_menu.pack(pady=(0, 10))
 
+            label = ctk.CTkLabel(self.history_frame, text="Historique", font=("Roboto", 16, "bold"))
+            label.pack(pady=(20, 5))
 
+            self.history_textbox = ctk.CTkTextbox(self.history_frame, width=280)
+            self.history_textbox.pack(fill="both", expand=True)
+            
+            
+            self.history_visible = True
+            self.update_history(history)
+
+    def update_history(self, history):
+        if self.history_visible and hasattr(self, 'history_textbox'):
+            self.history_textbox.configure(state="normal")
+            self.history_textbox.delete("0.0", "end")
+            content = "\n".join(reversed(history)) if history else "Aucun historique"
+            self.history_textbox.insert("0.0", content)
+            self.history_textbox.configure(state="disabled")
