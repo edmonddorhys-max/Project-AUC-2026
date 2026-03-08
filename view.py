@@ -13,7 +13,7 @@ class CalculatorView():
         self.root.iconbitmap("calculator.ico")
         self.root.minsize(530, 540)
         self.root.resizable(False, False)
-        self.root.geometry("380x650")
+        self.root.geometry("630x650")
         self.root.configure(fg_color="#1e1e1e")
       
      
@@ -153,7 +153,7 @@ class CalculatorView():
     def toggle_menu(self, history):
         if self.history_visible:
             self.history_frame.destroy()
-            self.root.geometry("380x650")
+            self.root.geometry("630x650")
             self.history_visible = False
         else:
             self.root.geometry("680x650")
