@@ -25,7 +25,7 @@ Assurez-vous d'avoir Python 3.x installé sur votre machine.
 Clonez ce dépôt sur votre machine locale :
 
 Bash
-git clone https://github.com/votre-nom-utilisateur/nom-du-repo.git
+git clone https://github.com/edmonddorhys-max/Project-AUC-2026.git
 cd nom-du-repo
 Installez la dépendance requise pour l'interface graphique :
 
